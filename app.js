@@ -70,11 +70,11 @@ const run = async () => {
 		create_livestream: true
 	}
 	// Exec.
-	const event = await ApiService().findOrCreate('events', eventData, false)
+	const event = await ApiService().findOrCreate('events', eventData, true)
 	console.log('event => ', event)
-	const homeTeam = await ApiService().findOrCreate('teams', homeTeamData, false)
+	const homeTeam = await ApiService().findOrCreate('teams', homeTeamData, true)
 	console.log('homeTeam => ', homeTeam)
-	const awayTeam = await ApiService().findOrCreate('teams', awayTeamData, false)
+	const awayTeam = await ApiService().findOrCreate('teams', awayTeamData, true)
 	console.log('awayTeam => ', awayTeam)
 	const game = await ApiService().findOrCreate(
 		'games',
