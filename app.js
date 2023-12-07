@@ -60,7 +60,7 @@ const run = async () => {
 		event_id: eventData.id
 	}
 	const gameData = {
-		event_id: 'test',
+		event_id: eventData.id,
 		period_length: 20,
 		number_of_periods: 3,
 		start_at: '2023-12-01T10:00:00Z',
