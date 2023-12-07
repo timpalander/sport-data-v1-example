@@ -22,12 +22,14 @@ const ApiService = () => {
 		let obj = await axiosInstance.get(url, { params })
 																 .then((response) => response.data)
 																 .catch((error) => { console.log(error.response.data) })
-		if (obj && patchIfExists) {
-			// Optional patch if already exists
-			console.log('[PATCH]', url, params)
-			obj = await axiosInstance.patch(url, params)
-															 .then((response) => response.data)
-															 .catch((error) => { console.log(error.response.data) })
+		if (obj) {
+			if (patchIfExists) {
+				// Optional patch if already exists
+				console.log('[PATCH]', url, params)
+				obj = await axiosInstance.patch(url, params)
+																.then((response) => response.data)
+																.catch((error) => { console.log(error.response.data) })
+			}
 		} else {
 			const postUrl = getEndpointUrl(type)
 			console.log('[POST]', url, params)
@@ -68,11 +70,11 @@ const run = async () => {
 		create_livestream: true
 	}
 	// Exec.
-	const event = await ApiService().findOrCreate('events', eventData, true)
+	const event = await ApiService().findOrCreate('events', eventData, false)
 	console.log('event => ', event)
-	const homeTeam = await ApiService().findOrCreate('teams', homeTeamData, true)
+	const homeTeam = await ApiService().findOrCreate('teams', homeTeamData, false)
 	console.log('homeTeam => ', homeTeam)
-	const awayTeam = await ApiService().findOrCreate('teams', awayTeamData, true)
+	const awayTeam = await ApiService().findOrCreate('teams', awayTeamData, false)
 	console.log('awayTeam => ', awayTeam)
 	const game = await ApiService().findOrCreate(
 		'games',
